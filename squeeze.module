@@ -158,8 +158,16 @@ function squeeze_webform_save_sid_on_submit($form, &$form_state) {
   }
 
   if ($_SESSION['destination']) {
-    $form_state['redirect'][0] = $_SESSION['destination'];
-    $_SESSION['destination'] = FALSE;
+    if ($_SESSION['origin']){
+      $_SESSION['download_id'] = 'squeeze-file-download';
+      drupal_set_message(variable_get('squeeze_settings_download_message', t('Your file download will begin shortly. If it does not, you can manually download your file.')) . '&nbsp;' . l(t('Manual download.'), $_SESSION['destination'], array('attributes' => array('id' => $_SESSION['download_id']))));
+      $form_state['redirect'][0] = $_SESSION['origin'];
+      $_SESSION['destination'] = $_SESSION['origin'] = FALSE;
+    }
+    else {
+      $form_state['redirect'][0] = $_SESSION['destination'];
+      $_SESSION['destination'] = FALSE;
+    }
   }
 }
 
