@@ -37,6 +37,18 @@ function squeeze_admin_settings() {
        array('@permission' => t('skip squeeze page'), '@anonymous_user' => t('anonymous user'))),
     '#default_value' => variable_get('squeeze_settings_anonymous_only', 0),
   );
+  $form['squeeze_settings_redirect'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Redirect back to protected page'),
+    '#description' => t('Check if you want the page to redirect back to the protected page after the webform is successfully submitted. Upon returning to the protected page, the download will be automatically initiated with JavaSrcipt and a message will be displayed at the top of the page with a manual download link if the automatic download does not begin.'),
+    '#default_value' => variable_get('squeeze_settings_redirect', 1),
+  );
+  $form['squeeze_settings_download_message'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Download will start now message'),
+    '#description' => t('The message displayed at the top of the page to indicate that the download will automatically begin. Note: this only applies if "Redirect back to protected page" is selected.'),
+    '#default_value' => variable_get('squeeze_settings_download_message', t('Your file download will begin shortly. If it does not, you can manually download your file.')),
+  );
   $form['squeeze_settings_content_types'] = array(
     '#type' => 'checkboxes',
     '#title' => t('Squeeze enabled content types'),
