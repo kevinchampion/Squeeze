@@ -1,0 +1,11 @@
+name = Squeeze
+description = Require user to fill webform before accessing node.
+core = 6.x
+dependencies[] = webform
+
+; Information added by drupal.org packaging script on 2011-10-01
+version = "6.x-1.x-dev"
+core = "6.x"
+project = "squeeze"
+datestamp = "1317429976"
+

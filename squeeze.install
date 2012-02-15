@@ -1,0 +1,18 @@
+<?php
+/**
+ * Implements hook_uninstall().
+ */
+function squeeze_uninstall() {
+  squeeze_variable_del_all('squeeze_');
+}
+
+/**
+ * Utility function that is an altered version of variable_del, it will delete
+ * a set of variables set by a module.
+ *
+ * @param string $name The variables' namespace for which to delete
+ */
+function squeeze_variable_del_all($name) {
+  db_query("DELETE FROM {variable} WHERE name LIKE '%s%%'", addcslashes($name, '%_'));
+  cache_clear_all('variables', 'cache');
+}
