@@ -89,6 +89,8 @@ function squeeze_init() {
 
   if (!$sid) {
     $_SESSION['destination'] = $_GET['q'];
+    if (variable_get('squeeze_settings_redirect', 1) == 1)
+      $_SESSION['origin'] = 'node/' . $node->nid;
     drupal_goto('node/'. $squeeze_webform_nid);
   }
 }
