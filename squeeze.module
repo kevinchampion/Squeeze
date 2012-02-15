@@ -198,6 +198,13 @@ function squeeze_nodeapi(&$node, $op, $a3, $a4) {
       variable_del('squeeze_node_'. $node->nid);
       variable_del('squeeze_node_'. $node->nid .'_show_page');
       break;
+    case 'view':
+      // add javascript to download file if download_id session var exists
+      if ($_SESSION['download_id']){
+        drupal_add_js("$(function() { $(window).bind('load', function() { window.location = $('#" . $_SESSION['download_id'] . "').attr('href'); }); });", 'inline', 'footer');
+        $_SESSION['download_id'] = FALSE;
+      }
+      break;
   }
 }
 
